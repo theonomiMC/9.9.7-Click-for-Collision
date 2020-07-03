@@ -1,0 +1,49 @@
+var blueCircle;
+var redCircle;
+var RADIUS = 25;
+var DX_RED = 6;
+var DX_BLUE = 4;
+var DELAY = 20;
+var paused= true;
+var dy = 0;
+var redX = getWidth()/2;
+var redY = getHeight()/2;
+var blueX = 50;
+var blueY = getHeight()/2;
+function start(){
+    drawblueCircle();
+    drawredCircle();
+    setTimer(move, 20);
+}
+function drawredCircle(){
+    redCircle = new Circle(RADIUS);
+    redCircle.setPosition(redX, redY);
+    redCircle.setColor(Color.red);
+    add(redCircle);
+}
+function drawblueCircle(){
+    blueCircle = new Circle(RADIUS);
+    blueCircle.setPosition(blueX, blueY);
+    blueCircle.setColor(Color.blue);
+    add(blueCircle);
+}
+function move(){
+blueCircle.move(DX_BLUE, 0);
+    if (blueCircle.getX() >= getWidth()/2 - RADIUS){
+     redCircle.move(DX_RED, 0);
+    }
+    mouseClickMethod(pause);
+}
+function pause(){
+    paused;
+    if (paused == true){
+        stopTimer(move);
+    }
+    mouseClickMethod(resume);
+}
+function resume(){
+    paused = false;
+    if (paused == false){
+        setTimer(move, DELAY);
+    }
+}
